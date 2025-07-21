@@ -122,13 +122,6 @@ def get_languages():
         'message': 'Use these language codes or full names in the source_lang and target_lang fields of translation requests.'
     })
 
-@app.route('/batch-translate', methods=['POST'])
-def batch_translate():
-    """
-    批量翻译API，可以一次请求多个目标语言的翻译结果
-    目标语言可以用\n分隔的字符串或数组形式提供
-    """
-
 @app.route('/health', methods=['GET'])
 def health_check():
     """健康檢查端點，確認服務是否正常運行"""
@@ -136,6 +129,13 @@ def health_check():
         "status": "healthy",
         "model": GGUF_FILE
     })
+
+@app.route('/batch-translate', methods=['POST'])
+def batch_translate():
+    """
+    批量翻译API，可以一次请求多个目标语言的翻译结果
+    目标语言可以用\n分隔的字符串或数组形式提供
+    """
     data = request.json
 
     # 验证输入
